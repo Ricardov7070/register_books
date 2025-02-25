@@ -46,7 +46,8 @@ services:
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel &&
 
-      echo '✅ Inicialização completa!' "
+      echo '✅ Inicialização completa!' &&
+      exec php-fpm"
 
 
 # Container de Aplicação Laravel-2

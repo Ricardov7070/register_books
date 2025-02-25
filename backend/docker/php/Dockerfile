@@ -34,6 +34,9 @@ WORKDIR /var/www/laravel
 # Limpe os arquivos temporários para reduzir o tamanho da imagem
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Gerando a chave do Laravel
+RUN php artisan key:generate
+
 # Copiando arquivos do projeto para o container
 COPY . .
 

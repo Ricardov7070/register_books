@@ -29,9 +29,6 @@ services:
       echo '📦 Instalando dependências do Composer...' &&
       composer install --no-dev --optimize-autoloader &&
 
-      echo '🔑 Gerando chave da aplicação...' &&
-      php artisan key:generate &&
-
       echo '🗑 Limpando cache do Laravel...' &&
       php artisan config:clear &&
       php artisan cache:clear &&

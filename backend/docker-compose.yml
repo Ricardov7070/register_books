@@ -128,18 +128,20 @@ services:
 # Container de Aplicação React
 react:
   build:
-    context: ../frontend/docker/php 
-    dockerfile: Dockerfile
-  container_name: react-container
+    context: ../frontend  
+    dockerfile: docker/php/Dockerfile
+  container_name: react-app
   restart: always
   ports:
     - "5173:5173"
   volumes:
     - ../frontend:/app
-  networks:
-    - laravel_app
+  stdin_open: true
+  tty: true
   depends_on:
     - nginx
+  networks:
+    - laravel_app
 
 # Container Mysql
   mysql:

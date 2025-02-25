@@ -28,23 +28,25 @@ services:
       sh -c "
       echo '📦 Instalando dependências do Composer...' &&
       composer install --no-dev --optimize-autoloader &&
-      
+
       echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
-      
+
       echo '🗑 Limpando cache do Laravel...' &&
       php artisan config:clear &&
       php artisan cache:clear &&
-      
+
       echo '⚡ Rodando migrations...' &&
       php artisan migrate --force &&
-      
+
       echo '🔐 Publicando Laravel Sanctum...' &&
       php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      
+
       echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel"
+      chown -R www-data:www-data /var/www/laravel &&
+
+      echo '✅ Inicialização completa!' "
 
 
 # Container de Aplicação Laravel-2
@@ -71,14 +73,6 @@ services:
       - redis
     networks:
       - laravel_app
-    command: >
-      sh -c "
-      echo '🔑 Gerando chave da aplicação...' &&
-      php artisan key:generate &&
-    
-      echo '🌐 Configurando permissões...' &&
-      chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel"
 
 
 # Container de Aplicação Laravel-3
@@ -105,14 +99,6 @@ services:
       - redis
     networks:
       - laravel_app
-    command: >
-      sh -c "
-      echo '🔑 Gerando chave da aplicação...' &&
-      php artisan key:generate &&
-    
-      echo '🌐 Configurando permissões...' &&
-      chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel"
 
 
 # Container de Aplicação Laravel-4
@@ -139,14 +125,6 @@ services:
       - redis
     networks:
       - laravel_app
-    command: >
-      sh -c "
-      echo '🔑 Gerando chave da aplicação...' &&
-      php artisan key:generate &&
-    
-      echo '🌐 Configurando permissões...' &&
-      chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel"
 
 
 # Container de Aplicação Laravel-5
@@ -173,14 +151,6 @@ services:
       - redis
     networks:
       - laravel_app
-    command: >
-      sh -c "
-      echo '🔑 Gerando chave da aplicação...' &&
-      php artisan key:generate &&
-    
-      echo '🌐 Configurando permissões...' &&
-      chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel"
 
 
 # Container de Aplicação React

@@ -126,7 +126,7 @@ services:
       - laravel_app
 
 # Container de Aplicação React
-React:
+react:
   build:
     context: ../frontend/docker/php 
     dockerfile: Dockerfile

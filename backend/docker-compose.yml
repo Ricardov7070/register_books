@@ -4,7 +4,7 @@ services:
   laravel-1:
     build:
       context: .
-      dockerfile: .backend/docker/php/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     container_name: laravel-1
     restart: always
     tty: true
@@ -29,7 +29,7 @@ services:
   laravel-2:
     build:
       context: .
-      dockerfile: .backend/docker/php/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     container_name: laravel-2
     restart: always
     tty: true
@@ -54,7 +54,7 @@ services:
   laravel-3:
     build:
       context: .
-      dockerfile: .backend/docker/php/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     container_name: laravel-3
     restart: always
     tty: true
@@ -79,7 +79,7 @@ services:
   laravel-4:
     build:
       context: .
-      dockerfile: .backend/docker/php/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     container_name: laravel-4
     restart: always
     tty: true
@@ -104,7 +104,7 @@ services:
   laravel-5:
     build:
       context: .
-      dockerfile: .backend/docker/php/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     container_name: laravel-5
     restart: always
     tty: true
@@ -128,7 +128,7 @@ services:
 # Container de Aplicação React
 React:
   build:
-    context: ./frontend/docker/php/Dockerfile
+    context: ../frontend/docker/php/Dockerfile
     dockerfile: Dockerfile
   container_name: react-container
   restart: always

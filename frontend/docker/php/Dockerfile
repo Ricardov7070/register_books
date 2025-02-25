@@ -1,20 +1,24 @@
 # Usa a imagem oficial do Node.js como base
-FROM node:22-slim
+FROM node:18-alpine
 
-# Configurando o diretório de trabalho
+# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copiando os arquivos package.json e package-lock.json para instalação das dependências
-COPY package*.json ./
+# Copia apenas os arquivos de dependências primeiro
+COPY package.json package-lock.json ./
 
-# Instalando todas as dependências do projeto, incluindo Vite
-RUN npm install && npm install -g vite
+# Instala TODAS as dependências antes de copiar o restante dos arquivos
+RUN npm install --legacy-peer-deps
 
-# Copiando todos os arquivos do projeto para dentro do container
+# Copia todos os arquivos do projeto para dentro do container
 COPY . .
+
+# Garante que o Vite seja instalado corretamente
+RUN npm install -g vite
 
 # Expondo a porta usada pelo Vite
 EXPOSE 5173
 
-# Comando para iniciar o servidor do React com Vite
+# Inicia o servidor do React com Vite dentro do container
 CMD ["npm", "run", "dev", "--", "--host"]
+

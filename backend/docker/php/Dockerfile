@@ -2,7 +2,7 @@
 FROM php:8.1-fpm
 
 # Maintainer do Docker
-LABEL maintainer="seu-email@example.com"
+LABEL maintainer="ricardov7070@gmail.com"
 
 # Atualizando o sistema e instalando dependências básicas
 RUN apt-get update && apt-get install -y \
@@ -36,12 +36,24 @@ RUN php -v && node -v && npm -v
 # Configurando o diretório de trabalho
 WORKDIR /var/www/laravel
 
+# Instala as dependências necessárias e a extensão PDO MySQL
+RUN apt-get update && apt-get install -y \
+    libmariadb-dev && \
+    docker-php-ext-install pdo_mysql
+
+# Limpe os arquivos temporários para reduzir o tamanho da imagem
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Copiando arquivos do projeto para o container
 COPY . .
 
 # Instalando dependências do Composer
 RUN composer install --no-dev --optimize-autoloader
 
+# Instalando Laravel Sanctum
+RUN composer require laravel/sanctum && \
+    php artisan vendor:publish --provider="Laravel\\Sanctum\\SanctumServiceProvider"
+    
 # Gerando a chave do Laravel
 RUN php artisan key:generate
 
@@ -52,9 +64,8 @@ RUN chmod -R 775 storage bootstrap/cache && \
 # Instalando dependências de frontend do Laravel (opcional, para Laravel Mix ou Vite)
 RUN npm install && npm run build
 
-# Instalando extensões PHP adicionais, incluindo pdo_mysql
-RUN docker-php-ext-install zip mbstring curl xml bcmath pdo pdo_mysql && \
-    docker-php-ext-enable pdo pdo_mysql
+# Instala a biblioteca PHPMailer
+RUN composer require phpmailer/phpmailer
 
 # Copiando arquivos do projeto para o container
 COPY . .
@@ -62,6 +73,5 @@ COPY . .
 # Expondo a porta 5000
 EXPOSE 5000
 
-# Comando para iniciar o servidor embutido do Laravel
-CMD ["php-fpm"]
-
+# Comando para rodar as migrates e iniciar o servidor embutido do Laravel
+CMD php artisan migrate && php artisan serve --host=localhost

@@ -26,18 +26,29 @@ services:
       - laravel_app
     command: >
       sh -c "
-      if [ ! -f .env ]; then cp .env.example .env; fi &&
+      echo '📦 Instalando dependências do Composer...' &&
       composer install --no-dev --optimize-autoloader &&
+      
+      echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
+      
+      echo '🗑 Limpando cache do Laravel...' &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      
+      echo '⌛ Aguardando MySQL iniciar...' &&
       while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
+      
+      echo '⚡ Rodando migrations...' &&
       php artisan migrate --force &&
+      
+      echo '🔐 Publicando Laravel Sanctum...' &&
       php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      npm install && npm run build &&
+      
+      echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel &&
-      php-fpm"
+      chown -R www-data:www-data /var/www/laravel"
+
 
 # Container de Aplicação Laravel-2
   laravel-2:
@@ -65,18 +76,29 @@ services:
       - laravel_app
     command: >
       sh -c "
-      if [ ! -f .env ]; then cp .env.example .env; fi &&
+      echo '📦 Instalando dependências do Composer...' &&
       composer install --no-dev --optimize-autoloader &&
+      
+      echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
+      
+      echo '🗑 Limpando cache do Laravel...' &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      
+      echo '⌛ Aguardando MySQL iniciar...' &&
       while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
+      
+      echo '⚡ Rodando migrations...' &&
       php artisan migrate --force &&
+      
+      echo '🔐 Publicando Laravel Sanctum...' &&
       php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      npm install && npm run build &&
+      
+      echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel &&
-      php-fpm"
+      chown -R www-data:www-data /var/www/laravel"
+
 
 # Container de Aplicação Laravel-3
   laravel-3:
@@ -104,18 +126,29 @@ services:
       - laravel_app
     command: >
       sh -c "
-      if [ ! -f .env ]; then cp .env.example .env; fi &&
+      echo '📦 Instalando dependências do Composer...' &&
       composer install --no-dev --optimize-autoloader &&
+      
+      echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
+      
+      echo '🗑 Limpando cache do Laravel...' &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      
+      echo '⌛ Aguardando MySQL iniciar...' &&
       while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
+      
+      echo '⚡ Rodando migrations...' &&
       php artisan migrate --force &&
+      
+      echo '🔐 Publicando Laravel Sanctum...' &&
       php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      npm install && npm run build &&
+      
+      echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel &&
-      php-fpm"
+      chown -R www-data:www-data /var/www/laravel"
+
 
 # Container de Aplicação Laravel-4
   laravel-4:
@@ -143,18 +176,29 @@ services:
       - laravel_app
     command: >
       sh -c "
-      if [ ! -f .env ]; then cp .env.example .env; fi &&
+      echo '📦 Instalando dependências do Composer...' &&
       composer install --no-dev --optimize-autoloader &&
+      
+      echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
+      
+      echo '🗑 Limpando cache do Laravel...' &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      
+      echo '⌛ Aguardando MySQL iniciar...' &&
       while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
+      
+      echo '⚡ Rodando migrations...' &&
       php artisan migrate --force &&
+      
+      echo '🔐 Publicando Laravel Sanctum...' &&
       php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      npm install && npm run build &&
+      
+      echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel &&
-      php-fpm"
+      chown -R www-data:www-data /var/www/laravel"
+
 
 # Container de Aplicação Laravel-5
   laravel-5:
@@ -182,18 +226,29 @@ services:
       - laravel_app
     command: >
       sh -c "
-      if [ ! -f .env ]; then cp .env.example .env; fi &&
+      echo '📦 Instalando dependências do Composer...' &&
       composer install --no-dev --optimize-autoloader &&
+      
+      echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
+      
+      echo '🗑 Limpando cache do Laravel...' &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      
+      echo '⌛ Aguardando MySQL iniciar...' &&
       while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
+      
+      echo '⚡ Rodando migrations...' &&
       php artisan migrate --force &&
+      
+      echo '🔐 Publicando Laravel Sanctum...' &&
       php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      npm install && npm run build &&
+      
+      echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
-      chown -R www-data:www-data /var/www/laravel &&
-      php-fpm"
+      chown -R www-data:www-data /var/www/laravel"
+
 
 # Container de Aplicação React
   react:
@@ -214,6 +269,7 @@ services:
     networks:
       - laravel_app
 
+
 # Container Mysql
   mysql:
     image: mysql:8.0
@@ -231,6 +287,7 @@ services:
     networks:
       - laravel_app
 
+
 # Container Redis
   redis:
     image: redis:alpine
@@ -241,6 +298,7 @@ services:
     networks:
       - laravel_app
 
+
 # Container Mailhog
   mailhog:
     image: mailhog/mailhog:latest
@@ -248,6 +306,7 @@ services:
     restart: always
     networks:
       - laravel_app
+
 
 # Container Nginx
   nginx:
@@ -267,6 +326,7 @@ services:
       - laravel-5
     networks:
       - laravel_app
+
 
 # Container Ngrok
   ngrok:

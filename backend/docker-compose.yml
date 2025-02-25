@@ -126,22 +126,22 @@ services:
       - laravel_app
 
 # Container de Aplicação React
-react:
-  build:
-    context: ../frontend  
-    dockerfile: docker/php/Dockerfile
-  container_name: react-app
-  restart: always
-  ports:
-    - "5173:5173"
-  volumes:
-    - ../frontend:/app
-  stdin_open: true
-  tty: true
-  depends_on:
-    - nginx
-  networks:
-    - laravel_app
+  react:
+    build:
+      context: ../frontend  
+      dockerfile: docker/php/Dockerfile
+    container_name: react-app
+    restart: always
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../frontend:/app
+    stdin_open: true
+    tty: true
+    depends_on:
+      - nginx
+    networks:
+      - laravel_app
 
 # Container Mysql
   mysql:

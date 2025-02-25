@@ -73,8 +73,5 @@ COPY . .
 # Expondo a porta 5000
 EXPOSE 5000
 
-# Roda as migrates
-RUN php artisan migrate
-
 # Comando para iniciar o servidor embutido do Laravel
 CMD ["php-fpm"]

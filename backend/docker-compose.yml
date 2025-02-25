@@ -36,9 +36,6 @@ services:
       php artisan config:clear &&
       php artisan cache:clear &&
       
-      echo '⌛ Aguardando MySQL iniciar...' &&
-      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
-      
       echo '⚡ Rodando migrations...' &&
       php artisan migrate --force &&
       
@@ -76,25 +73,9 @@ services:
       - laravel_app
     command: >
       sh -c "
-      echo '📦 Instalando dependências do Composer...' &&
-      composer install --no-dev --optimize-autoloader &&
-      
       echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
-      
-      echo '🗑 Limpando cache do Laravel...' &&
-      php artisan config:clear &&
-      php artisan cache:clear &&
-      
-      echo '⌛ Aguardando MySQL iniciar...' &&
-      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
-      
-      echo '⚡ Rodando migrations...' &&
-      php artisan migrate --force &&
-      
-      echo '🔐 Publicando Laravel Sanctum...' &&
-      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      
+    
       echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel"
@@ -126,25 +107,9 @@ services:
       - laravel_app
     command: >
       sh -c "
-      echo '📦 Instalando dependências do Composer...' &&
-      composer install --no-dev --optimize-autoloader &&
-      
       echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
-      
-      echo '🗑 Limpando cache do Laravel...' &&
-      php artisan config:clear &&
-      php artisan cache:clear &&
-      
-      echo '⌛ Aguardando MySQL iniciar...' &&
-      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
-      
-      echo '⚡ Rodando migrations...' &&
-      php artisan migrate --force &&
-      
-      echo '🔐 Publicando Laravel Sanctum...' &&
-      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      
+    
       echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel"
@@ -176,25 +141,9 @@ services:
       - laravel_app
     command: >
       sh -c "
-      echo '📦 Instalando dependências do Composer...' &&
-      composer install --no-dev --optimize-autoloader &&
-      
       echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
-      
-      echo '🗑 Limpando cache do Laravel...' &&
-      php artisan config:clear &&
-      php artisan cache:clear &&
-      
-      echo '⌛ Aguardando MySQL iniciar...' &&
-      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
-      
-      echo '⚡ Rodando migrations...' &&
-      php artisan migrate --force &&
-      
-      echo '🔐 Publicando Laravel Sanctum...' &&
-      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      
+    
       echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel"
@@ -226,25 +175,9 @@ services:
       - laravel_app
     command: >
       sh -c "
-      echo '📦 Instalando dependências do Composer...' &&
-      composer install --no-dev --optimize-autoloader &&
-      
       echo '🔑 Gerando chave da aplicação...' &&
       php artisan key:generate &&
-      
-      echo '🗑 Limpando cache do Laravel...' &&
-      php artisan config:clear &&
-      php artisan cache:clear &&
-      
-      echo '⌛ Aguardando MySQL iniciar...' &&
-      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
-      
-      echo '⚡ Rodando migrations...' &&
-      php artisan migrate --force &&
-      
-      echo '🔐 Publicando Laravel Sanctum...' &&
-      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
-      
+    
       echo '🌐 Configurando permissões...' &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel"

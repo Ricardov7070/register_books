@@ -34,9 +34,6 @@ WORKDIR /var/www/laravel
 # Limpe os arquivos temporários para reduzir o tamanho da imagem
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Instalando dependências de frontend do Laravel (opcional, para Laravel Mix ou Vite)
-RUN npm install && npm run build
-
 # Copiando arquivos do projeto para o container
 COPY . .
 

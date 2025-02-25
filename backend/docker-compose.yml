@@ -71,6 +71,13 @@ services:
       - redis
     networks:
       - laravel_app
+    command: >
+      sh -c "
+      echo '🔑 Gerando chave da aplicação...' &&
+      php artisan key:generate &&
+
+      echo '✅ Inicialização completa!' &&
+      exec php-fpm"
 
 
 # Container de Aplicação Laravel-3

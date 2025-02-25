@@ -1,9 +1,6 @@
 # Imagem base com PHP 8.1 pré-instalado
 FROM php:8.1-fpm
 
-# Maintainer do Docker
-LABEL maintainer="ricardov7070@gmail.com"
-
 # Atualizando o sistema e instalando dependências básicas
 RUN apt-get update && apt-get install -y \
     curl \
@@ -30,9 +27,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get remove -y nodejs && \
     apt-get autoremove -y
 
-# Verificando as versões do PHP e Node.js
-RUN php -v && node -v && npm -v
-
 # Configurando o diretório de trabalho
 WORKDIR /var/www/laravel
 
@@ -53,13 +47,6 @@ RUN composer install --no-dev --optimize-autoloader
 # Instalando Laravel Sanctum
 RUN composer require laravel/sanctum && \
     php artisan vendor:publish --provider="Laravel\\Sanctum\\SanctumServiceProvider"
-    
-# Gerando a chave do Laravel
-RUN php artisan key:generate
-
-# Configurando permissões
-RUN chmod -R 775 storage bootstrap/cache && \
-    chown -R www-data:www-data /var/www/laravel
 
 # Instalando dependências de frontend do Laravel (opcional, para Laravel Mix ou Vite)
 RUN npm install && npm run build

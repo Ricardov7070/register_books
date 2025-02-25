@@ -24,6 +24,16 @@ services:
       - redis
     networks:
       - laravel_app
+    command: >
+      sh -c "
+      composer install --no-dev --optimize-autoloader &&
+      php artisan key:generate &&
+      php artisan config:clear &&
+      php artisan cache:clear &&
+      php artisan migrate --force &&
+      chmod -R 775 storage bootstrap/cache &&
+      chown -R www-data:www-data /var/www/laravel &&
+      php-fpm"
 
 # Container de Aplicação Laravel-2
   laravel-2:
@@ -49,6 +59,16 @@ services:
       - redis
     networks:
       - laravel_app
+    command: >
+      sh -c "
+      composer install --no-dev --optimize-autoloader &&
+      php artisan key:generate &&
+      php artisan config:clear &&
+      php artisan cache:clear &&
+      php artisan migrate --force &&
+      chmod -R 775 storage bootstrap/cache &&
+      chown -R www-data:www-data /var/www/laravel &&
+      php-fpm"
 
 # Container de Aplicação Laravel-3
   laravel-3:
@@ -74,6 +94,16 @@ services:
       - redis
     networks:
       - laravel_app
+    command: >
+      sh -c "
+      composer install --no-dev --optimize-autoloader &&
+      php artisan key:generate &&
+      php artisan config:clear &&
+      php artisan cache:clear &&
+      php artisan migrate --force &&
+      chmod -R 775 storage bootstrap/cache &&
+      chown -R www-data:www-data /var/www/laravel &&
+      php-fpm"
 
 # Container de Aplicação Laravel-4
   laravel-4:
@@ -99,6 +129,16 @@ services:
       - redis
     networks:
       - laravel_app
+    command: >
+      sh -c "
+      composer install --no-dev --optimize-autoloader &&
+      php artisan key:generate &&
+      php artisan config:clear &&
+      php artisan cache:clear &&
+      php artisan migrate --force &&
+      chmod -R 775 storage bootstrap/cache &&
+      chown -R www-data:www-data /var/www/laravel &&
+      php-fpm"
 
 # Container de Aplicação Laravel-5
   laravel-5:
@@ -124,6 +164,16 @@ services:
       - redis
     networks:
       - laravel_app
+    command: >
+      sh -c "
+      composer install --no-dev --optimize-autoloader &&
+      php artisan key:generate &&
+      php artisan config:clear &&
+      php artisan cache:clear &&
+      php artisan migrate --force &&
+      chmod -R 775 storage bootstrap/cache &&
+      chown -R www-data:www-data /var/www/laravel &&
+      php-fpm"
 
 # Container de Aplicação React
   react:

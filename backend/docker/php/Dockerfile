@@ -1,4 +1,4 @@
-# Imagem base com PHP 8.1 pré-instalado
+# Usa a imagem oficial do PHP 8.1 com FPM
 FROM php:8.1-fpm
 
 # Atualizando o sistema e instalando dependências básicas
@@ -10,11 +10,12 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libcurl4-openssl-dev \
     libxml2-dev \
-    procps && \
-    apt-get clean
+    procps \
+    libmariadb-dev \
+    && apt-get clean
 
 # Instalando extensões PHP adicionais
-RUN docker-php-ext-install zip mbstring curl xml bcmath
+RUN docker-php-ext-install zip mbstring curl xml bcmath pdo_mysql
 
 # Instalando o Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -27,38 +28,20 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get remove -y nodejs && \
     apt-get autoremove -y
 
-# Configurando o diretório de trabalho
+# Definindo o diretório de trabalho
 WORKDIR /var/www/laravel
-
-# Instala as dependências necessárias e a extensão PDO MySQL
-RUN apt-get update && apt-get install -y \
-    libmariadb-dev && \
-    docker-php-ext-install pdo_mysql
 
 # Limpe os arquivos temporários para reduzir o tamanho da imagem
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copiando arquivos do projeto para o container
-COPY . .
-
-# Instalando dependências do Composer
-RUN composer install --no-dev --optimize-autoloader
-
-# Instalando Laravel Sanctum
-RUN composer require laravel/sanctum && \
-    php artisan vendor:publish --provider="Laravel\\Sanctum\\SanctumServiceProvider"
-
 # Instalando dependências de frontend do Laravel (opcional, para Laravel Mix ou Vite)
 RUN npm install && npm run build
 
-# Instala a biblioteca PHPMailer
-RUN composer require phpmailer/phpmailer
-
 # Copiando arquivos do projeto para o container
 COPY . .
 
-# Expondo a porta 5000
+# Expondo a porta do PHP-FPM
 EXPOSE 5000
 
-# Comando para iniciar o servidor embutido do Laravel
+# Inicia o PHP-FPM no container
 CMD ["php-fpm"]

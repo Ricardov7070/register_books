@@ -26,11 +26,15 @@ services:
       - laravel_app
     command: >
       sh -c "
+      if [ ! -f .env ]; then cp .env.example .env; fi &&
       composer install --no-dev --optimize-autoloader &&
       php artisan key:generate &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
       php artisan migrate --force &&
+      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
+      npm install && npm run build &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel &&
       php-fpm"
@@ -61,11 +65,15 @@ services:
       - laravel_app
     command: >
       sh -c "
+      if [ ! -f .env ]; then cp .env.example .env; fi &&
       composer install --no-dev --optimize-autoloader &&
       php artisan key:generate &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
       php artisan migrate --force &&
+      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
+      npm install && npm run build &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel &&
       php-fpm"
@@ -96,11 +104,15 @@ services:
       - laravel_app
     command: >
       sh -c "
+      if [ ! -f .env ]; then cp .env.example .env; fi &&
       composer install --no-dev --optimize-autoloader &&
       php artisan key:generate &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
       php artisan migrate --force &&
+      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
+      npm install && npm run build &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel &&
       php-fpm"
@@ -131,11 +143,15 @@ services:
       - laravel_app
     command: >
       sh -c "
+      if [ ! -f .env ]; then cp .env.example .env; fi &&
       composer install --no-dev --optimize-autoloader &&
       php artisan key:generate &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
       php artisan migrate --force &&
+      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
+      npm install && npm run build &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel &&
       php-fpm"
@@ -166,11 +182,15 @@ services:
       - laravel_app
     command: >
       sh -c "
+      if [ ! -f .env ]; then cp .env.example .env; fi &&
       composer install --no-dev --optimize-autoloader &&
       php artisan key:generate &&
       php artisan config:clear &&
       php artisan cache:clear &&
+      while ! mysqladmin ping -hmysql --silent; do sleep 1; done &&
       php artisan migrate --force &&
+      php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
+      npm install && npm run build &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel &&
       php-fpm"

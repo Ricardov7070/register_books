@@ -4,14 +4,11 @@ FROM node:22-slim
 # Configurando o diretório de trabalho
 WORKDIR /app
 
-# Copiando os arquivos de dependências para instalação antecipada
+# Copiando os arquivos package.json e package-lock.json para instalação das dependências
 COPY package*.json ./
 
-# Instalando as dependências do projeto
-RUN npm install
-
-# Instalando o Vite globalmente no container
-RUN npm install -g vite
+# Instalando todas as dependências do projeto, incluindo Vite
+RUN npm install && npm install -g vite
 
 # Copiando todos os arquivos do projeto para dentro do container
 COPY . .

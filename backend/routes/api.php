@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/users', [UserController::class, 'index']);
+Route::post('/login', [UserController::class, 'userAuthentication']);

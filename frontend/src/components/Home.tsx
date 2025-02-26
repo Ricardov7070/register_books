@@ -11,11 +11,11 @@ export interface Book {
 }
 
 const Home: React.FC = () => {
+
   const [books, setBooks] = useState<Book[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [editBook, setEditBook] = useState<Book | null>(null);
 
-  // Estados de paginação
   const [currentPage, setCurrentPage] = useState<number>(1);
   const booksPerPage = 5;
 
@@ -24,26 +24,31 @@ const Home: React.FC = () => {
     setModalOpen(true);
   };
 
+
   const handleEditBook = (book: Book) => {
+
     setEditBook(book);
     setModalOpen(true);
+
   };
 
   const handleDeleteBook = (id: number) => {
+
     if (window.confirm("Deseja deletar este livro?")) {
       setBooks(books.filter((book) => book.id !== id));
     }
+
   };
 
   const handleSaveBook = (book: Book) => {
+
     if (editBook) {
-      // Atualiza livro existente
       setBooks(books.map((b) => (b.id === book.id ? book : b)));
     } else {
-      // Adiciona novo livro (atribui id baseado em Date.now)
       setBooks([...books, { ...book, id: Date.now() }]);
     }
     setModalOpen(false);
+
   };
 
   // Lógica de paginação

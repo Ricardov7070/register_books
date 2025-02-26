@@ -4,21 +4,53 @@ import AuthCard from "./AuthCard";
 import api from "../services/api";
 
 const Login: React.FC = () => {
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    api.post("/login", { email, password }).then((response) => {
-      if (response.status === 200) {
-        navigate("/home");
-      } else {
-        alert("Invalid email or password");
-      }
-    });
-  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
+    e.preventDefault();
+  
+    try {
+
+      const response = await api.post("/login", { email, password });
+  
+      if (response.status === 200) {
+
+        alert(response.data.success);
+
+        localStorage.setItem("token", response.data.access_token);
+        navigate("/home");
+
+      }
+    } catch (error: any) {
+
+      if (error.response?.status === 400) {
+
+        alert(error.response.data.message || "Invalid credentials!");
+
+      } else if (error.response?.status === 422) {
+
+        const errors = error.response.data.errors;
+        const errorMessages = Object.values(errors).flat().join("\n");
+        alert(errorMessages);
+
+      } else if (error.response?.status === 500) {
+
+        alert("Server error: " + (error.response.data.error || "Try again later."));
+
+      } else {
+
+        alert("Unexpected error: " + error.message);
+
+      }
+
+    }
+
+  };
+  
   return (
     <AuthCard title="Login">
       <form onSubmit={handleSubmit}>
@@ -60,6 +92,7 @@ const Login: React.FC = () => {
       </div>
     </AuthCard>
   );
+
 };
 
 export default Login;

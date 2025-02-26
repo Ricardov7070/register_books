@@ -11,12 +11,11 @@ const Header: React.FC = () => {
   return (
     <nav className="navbar navbar-light bg-white">
       <div className="container-fluid">
-        {/* Lado esquerdo: Marca */}
 
         <Link to="/home" className="navbar-brand">
           Zievo
         </Link>
-        {/* Lado direito: Dropdown de perfil */}
+
         <div className="dropdown">
           <button
             className="btn dropdown-toggle"
@@ -25,7 +24,6 @@ const Header: React.FC = () => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {/* Utilizando um ícone do Bootstrap Icons */}
             <i
               className="bi bi-person-circle"
               style={{ fontSize: "1.5rem" }}

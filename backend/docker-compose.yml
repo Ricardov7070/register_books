@@ -26,24 +26,24 @@ services:
       - laravel_app
     command: >
       sh -c "
-      echo '📦 Instalando dependências do Composer...' &&
+      echo '📦 Installing Composer dependencies...' &&
       composer install --no-dev --optimize-autoloader &&
 
-      echo '🗑 Limpando cache do Laravel...' &&
+      echo '🗑 Clearing Laravel cache...' &&
       php artisan config:clear &&
       php artisan cache:clear &&
 
-      echo '⚡ Rodando migrations...' &&
+      echo '⚡Running migrations...' &&
       php artisan migrate --force &&
 
-      echo '🔐 Publicando Laravel Sanctum...' &&
+      echo '🔐 Publishing Laravel Sanctum...' &&
       php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
 
-      echo '🌐 Configurando permissões...' &&
+      echo '🌐 Configuring permissions...' &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel &&
 
-      echo '✅ Inicialização completa!' &&
+      echo '✅ Initialization complete!' &&
       exec php-fpm"
 
 
@@ -73,10 +73,10 @@ services:
       - laravel_app
     command: >
       sh -c "
-      echo '🔑 Gerando chave da aplicação...' &&
+      echo '🔑 Generating application key...' &&
       php artisan key:generate &&
 
-      echo '✅ Inicialização completa!' &&
+      echo '✅ Initialization complete!' &&
       exec php-fpm"
 
 

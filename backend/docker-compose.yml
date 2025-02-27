@@ -162,7 +162,7 @@ services:
   react:
     build:
       context: ../frontend  
-      dockerfile: docker/php/Dockerfile
+      dockerfile: docker/Dockerfile
     container_name: react-container
     restart: always
     ports:
@@ -201,6 +201,8 @@ services:
     image: redis:alpine
     container_name: redis-container
     restart: always
+    environment:
+      - VITE_API_BASE_URL=http://localhost:80/api
     volumes:
       - redis-data:/data
     networks:

@@ -39,6 +39,9 @@ services:
       echo '🔐 Publishing Laravel Sanctum...' &&
       php artisan vendor:publish --provider='Laravel\\Sanctum\\SanctumServiceProvider' &&
 
+      echo '🔐 Publishing Swagger...' &&
+      php artisan vendor:publish --provider='L5Swagger\L5SwaggerServiceProvider' &&
+
       echo '🌐 Configuring permissions...' &&
       chmod -R 775 storage bootstrap/cache &&
       chown -R www-data:www-data /var/www/laravel &&
@@ -165,6 +168,8 @@ services:
       dockerfile: docker/Dockerfile
     container_name: react-container
     restart: always
+    environment:
+      - VITE_API_BASE_URL=http://localhost:80/api
     ports:
       - "5173:5173"
     volumes:
@@ -201,8 +206,6 @@ services:
     image: redis:alpine
     container_name: redis-container
     restart: always
-    environment:
-      - VITE_API_BASE_URL=http://localhost:80/api
     volumes:
       - redis-data:/data
     networks:
@@ -214,6 +217,9 @@ services:
     image: mailhog/mailhog:latest
     container_name: mailhog-container
     restart: always
+    ports:
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web UI
     networks:
       - laravel_app
 

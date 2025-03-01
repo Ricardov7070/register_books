@@ -1,0 +1,223 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Cadastro de Livros",
+        "description": "Documentação da API Cadastro de Livros.",
+        "contact": {
+            "email": "suporte@zievo.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/registerBooks": {
+            "post": {
+                "tags": [
+                    "Gerenciamento de Livros"
+                ],
+                "summary": "Realiza o registro de um livro no banco de dados.",
+                "operationId": "ec6b8247ab74acbddba4a9669832d9ff",
+                "responses": {
+                    "200": {
+                        "description": "Successfully registered!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    },
+                    "400": {
+                        "description": "Error in registration!"
+                    }
+                }
+            }
+        },
+        "/api/updateBook/{id_book}": {
+            "put": {
+                "tags": [
+                    "Gerenciamento de Livros"
+                ],
+                "summary": "Realiza a atualização de dados cadastrais de um livro registrado.",
+                "operationId": "c093de8e557c1df818be360d65262519",
+                "responses": {
+                    "200": {
+                        "description": "Updated successfully!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    },
+                    "400": {
+                        "description": "Error when updating!"
+                    }
+                }
+            }
+        },
+        "/api/viewBook": {
+            "get": {
+                "tags": [
+                    "Gerenciamento de Livros"
+                ],
+                "summary": "Realiza a visualização de todos os livros registrados.",
+                "operationId": "9c1ba576efad0a5a0d7fbf71119648b0",
+                "responses": {
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    }
+                }
+            }
+        },
+        "/api/deleteBook/{id_book}": {
+            "delete": {
+                "tags": [
+                    "Gerenciamento de Livros"
+                ],
+                "summary": "Realiza a exclusão de um livro selecionado do banco de dados",
+                "operationId": "021dcc1d58e93b9711124515be18535d",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    }
+                }
+            }
+        },
+        "/api/auth/signin": {
+            "post": {
+                "tags": [
+                    "Gerenciamento de Usuário"
+                ],
+                "summary": "Realiza a autenticação do usuário.",
+                "operationId": "3a55266089301c021df769ead1c3d34c",
+                "responses": {
+                    "200": {
+                        "description": "Login successful!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    },
+                    "400": {
+                        "description": "Invalid credentials!, Validation error!"
+                    }
+                }
+            }
+        },
+        "/api/logoutUser/{id_user}": {
+            "post": {
+                "tags": [
+                    "Gerenciamento de Usuário"
+                ],
+                "summary": "Realiza o logout do usuário atual autenticado",
+                "operationId": "190cc0c834a85c1c6a0056df77bb3e72",
+                "responses": {
+                    "200": {
+                        "description": "Logout completed successfully!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    },
+                    "400": {
+                        "description": "Undefined User!"
+                    },
+                    "403": {
+                        "description": "Unauthorized access."
+                    }
+                }
+            }
+        },
+        "/api/auth/signup": {
+            "post": {
+                "tags": [
+                    "Gerenciamento de Usuário"
+                ],
+                "summary": "Realiza o registro do usuário.",
+                "operationId": "45dea6075a6879841ec098472aeca028",
+                "responses": {
+                    "200": {
+                        "description": "Successfully registered!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    },
+                    "400": {
+                        "description": "Error in registration!"
+                    }
+                }
+            }
+        },
+        "/api/updateUser/{id_user}": {
+            "put": {
+                "tags": [
+                    "Gerenciamento de Usuário"
+                ],
+                "summary": "Realiza a atualização de dados cadastrais do usuário registrado.",
+                "operationId": "0f67ac148919e97f49e2d82b9a3359f6",
+                "responses": {
+                    "200": {
+                        "description": "Updated successfully!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    },
+                    "400": {
+                        "description": "Undefined User!, Error when updating!"
+                    },
+                    "403": {
+                        "description": "Unauthorized access."
+                    }
+                }
+            }
+        },
+        "/api/deleteUser/{id_user}": {
+            "delete": {
+                "tags": [
+                    "Gerenciamento de Usuário"
+                ],
+                "summary": "Realiza a exclusão do usuário selecionado do banco de dados",
+                "operationId": "ff6cb3e02d556e23499d566eb1459c51",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    },
+                    "400": {
+                        "description": "Undefined User!"
+                    },
+                    "403": {
+                        "description": "Unauthorized access."
+                    }
+                }
+            }
+        },
+        "/api/auth/forgotPassword": {
+            "post": {
+                "tags": [
+                    "Gerenciamento de Usuário"
+                ],
+                "summary": "Realiza o envio de uma senha aleatória via email para o usuário que esqueceu sua chave de acesso.",
+                "operationId": "4d634678aff3ba5044ea4201b72250f3",
+                "responses": {
+                    "200": {
+                        "description": "Email sent successfully!"
+                    },
+                    "500": {
+                        "description": "An error occurred, try again!"
+                    },
+                    "400": {
+                        "description": "Error sending email!, Invalid Name or Email"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Gerenciamento de Livros",
+            "description": "Gerenciamento de Livros"
+        },
+        {
+            "name": "Gerenciamento de Usuário",
+            "description": "Gerenciamento de Usuário"
+        }
+    ]
+}

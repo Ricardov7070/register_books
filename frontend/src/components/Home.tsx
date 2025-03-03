@@ -57,6 +57,8 @@ const Home: React.FC = () => {
 
     } catch (error: any) {
 
+      console.log(error);
+
       if (error.response?.status === 400) {
 
         showAlert(`⚠️ ${error.response.data.message}`, "info");
@@ -103,8 +105,13 @@ const Home: React.FC = () => {
 
 
   const handleEditBook = (book: Book) => {
-    setEditBook(book);
-    setModalOpen(true);
+
+    if (window.confirm("Do you want to edit this book?")) {
+
+      setEditBook(book);
+      setModalOpen(true);
+
+    }
   };
 
 

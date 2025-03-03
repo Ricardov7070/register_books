@@ -11,7 +11,7 @@ O sistema permite relizar registros de usuários para login, permite a edicao e 
 - **Composer:** 2.8.5
 - **React:** 19.0.0
 - **Typescript:** 5.7.3
-- **Docker:** Para conteinerização e instalacao de todas as dependencias do projeto
+- **Docker:** Para conteinerização e instalação de todas as dependencias do projeto
 - **Insomnia:** Para testar as rotas da API
 - **Swagger:** Para a documentação da API
 - **Sanctum:** Para gerar token de autenticação

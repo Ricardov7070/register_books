@@ -38,7 +38,7 @@ O sistema permite relizar registros de usuários para login, permite a edicao e 
 
 2. **Executando os Containeres**
 
-   Após clonar o projeto, é nescessário renomear ou copiar o arquivo `.env.example` para `.env` e ajustar as variáveis de ambiente conforme necessário, incluindo as configurações para acesso ao banco de dados, para funcionando do serviço de email e para funcionamento correto do "Redis".
+   Após clonar o projeto, é nescessário renomear ou copiar o arquivo `.env.example` para `.env` no caminho (".\register_books\backend") e ajustar as variáveis de ambiente conforme necessário, incluindo as configurações para acesso ao banco de dados, para funcionando do serviço de email e para funcionamento correto do "Redis".
    Caso esteja em um ambiente linux, basta somente rodar o comando abaixo dentro da pasta do projeto:
        
     `cp .env.example .env`
@@ -83,9 +83,9 @@ O sistema permite relizar registros de usuários para login, permite a edicao e 
 
 7. **Rodar os testes unitários no backend:**
 
-    Caso deseje rodar os testes das funções da API invidualmente, você pode rodar o comando abaixo no terminal no diretório (".\register_books\backend"):
-
-   `php artisan test`
+    Caso deseje rodar os testes das funções da API invidualmente, você pode rodar o comando abaixo dentro de um dos containeres de aplicação do laravel:
+    `docker exec -it laravel-1 sh` => Comando exemplo para acessar o terminal do container;
+    `php artisan test` => Comando para rodar os testes unitários;
 
 9. **Testar as Rotas da API:**
 

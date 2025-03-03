@@ -50,10 +50,49 @@ const Header: React.FC = () => {
         if (response.status === 200) {
 
           showAlert(`✅ ${response.data.success}`, "success");
-
-          logout(); 
       
         }
+
+        setTimeout(() => {
+          logout(); 
+        }, 1500);
+
+      } catch (error: any) {
+
+        if (error.response.status === 400) {
+
+          showAlert(`⚠️ ${error.response.data.message}`, "info");
+
+        } else {
+
+          showAlert(`🚫 ${error.response.data.error}`, "error");
+
+        };
+
+      };
+
+    };
+
+  };
+
+
+  const handleEditUser = async () => {
+    
+    if (window.confirm("Would you like to edit this user?")) {
+
+      try {
+
+        const response = await api.put("/updateUser");
+
+        if (response.status === 200) {
+
+          showAlert(`✅ ${response.data.success}`, "success");
+      
+        }
+
+        setTimeout(() => {
+          logout(); 
+        }, 1500);
 
       } catch (error: any) {
 
@@ -99,7 +138,7 @@ const Header: React.FC = () => {
             </button>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
               <li>
-                <button className="dropdown-item">
+                <button className="dropdown-item" onClick={handleEditUser}>
                   Edit Profile
                 </button>
               </li>

@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Rotas "Usuários"
-    Route::put('/updateUser/{id_user}', [UserController::class, 'updateRecord']);
+    Route::put('/updateUser', [UserController::class, 'updateRecord']);
     Route::post('/logoutUser', [UserController::class, 'logoutUser']);
     Route::delete('/deleteUser', [UserController::class, 'deleteRecord']);
 

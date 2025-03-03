@@ -29,11 +29,11 @@ const Login: React.FC = () => {
 
         localStorage.setItem("token", response.data.access_token);
         
-        setTimeout(() => {
-          navigate("/home");
-        }, 1100);
-        
       }
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 1500);
 
     } catch (error: any) {
 

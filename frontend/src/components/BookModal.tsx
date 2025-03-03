@@ -77,11 +77,13 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
       if (response.status === 200) {
 
         showAlert(`✅ ${response.data.success}`, "success");
-        onSave(response.data.book);
-
+        
       }
 
-      onClose();
+      setTimeout(() => {
+        onSave(response.data.book);
+        onClose();
+      }, 1500);
 
     } catch (error: any) {
 
@@ -112,15 +114,15 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
       if (response.status === 200) {
 
         showAlert(`✅ ${response.data.success}`, "success");
-        onSave({ ...book, title, author, publisher, language, publication_year, edition, gender, quantity_pages, format });
     
       }
 
-      onClose();
+      setTimeout(() => {
+        onSave({ ...book, title, author, publisher, language, publication_year, edition, gender, quantity_pages, format });
+        onClose();
+      }, 1500);
 
     } catch (error: any) {
-
-      console.log(error);
 
       if (error.response.status === 400) {
 

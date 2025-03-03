@@ -219,19 +219,11 @@ class UserController extends Controller
  *     ),
  * )
  */
-    public function updateRecord (UserUpdateRequest $request, $id_user): JsonResponse {
+    public function updateRecord (UserUpdateRequest $request): JsonResponse {
 
         try {
 
-            if (auth()->id() !== (int) $id_user) {
-
-                return response()->json([
-                    'message' => 'Unauthorized access.',
-                ], 403);
-
-            }
-
-            $existingUser = $this->modelUsers->searchUser($id_user);
+            $existingUser = $this->modelUsers->searchUser(auth()->id());
 
             if (!$existingUser) {
 
@@ -241,14 +233,14 @@ class UserController extends Controller
 
             } else {
 
-                $record = $this->usersUpdateValidator($request, $id_user);
+                $record = $this->usersUpdateValidator($request, auth()->id());
 
                 if ($record->getData() !== []) {
                     return $record;
                 }
 
 
-                $user = $this->modelUsers->updateUser($request, $id_user);
+                $user = $this->modelUsers->updateUser($request, auth()->id());
 
                 $existingUser->tokens()->delete();
 

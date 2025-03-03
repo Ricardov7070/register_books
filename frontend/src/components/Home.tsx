@@ -57,17 +57,15 @@ const Home: React.FC = () => {
 
     } catch (error: any) {
 
-      console.log(error);
-
-      if (error.response?.status === 400) {
+      if (error.response.status === 400) {
 
         showAlert(`⚠️ ${error.response.data.message}`, "info");
 
       } else {
 
-        showAlert(`🚫 ${error.response?.data.error}`, "error");
+        showAlert(`🚫 ${error.response.data.error}`, "error");
 
-      }  
+      };
 
     }
 
@@ -128,21 +126,23 @@ const Home: React.FC = () => {
 
           showAlert(`✅ ${response.data.success}`, "success");
 
-          fetchBooks(); 
-
         }
+
+        setTimeout(() => {
+          fetchBooks(); 
+        }, 1500);
 
       } catch (error: any) {
 
-        if (error.response?.status === 400) {
+        if (error.response.status === 400) {
 
           showAlert(`⚠️ ${error.response.data.message}`, "info");
   
         } else {
   
-          showAlert(`🚫 ${error.response?.data.error}`, "error");
+          showAlert(`🚫 ${error.response.data.error}`, "error");
   
-        }  
+        };
 
       }
 

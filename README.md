@@ -11,16 +11,16 @@ O sistema permite relizar registros de usuários para login, permite a edicao e 
 - **Composer:** 2.8.5
 - **React:** 19.0.0
 - **Typescript:** 5.7.3
-- **Docker:** Para conteinerização e instalação de todas as dependencias do projeto
+- **Docker:** Para conteinerização e instalação de todas as dependências do projeto
 - **Insomnia:** Para testar as rotas da API
 - **Swagger:** Para a documentação da API
 - **Sanctum:** Para gerar token de autenticação
 - **PHPMailer:** Para envio de emails via SMTP
 - **PHPUnit:** Para teste unitários das funções do backend
 - **MailHog:** Para testes de envio de email
-- **NgRok:** Para criacao de túnels externos para acesso ao localhost
-- **Mysql:** Para criacao do banco de dados
-- **Nginx:** Para gereciamento de acesso aos containeres do docker, criação de proxy reverso e também Load-Balanced
+- **NgRok:** Para criação de túnels externos para acesso ao localhost
+- **Mysql:** Para criação do banco de dados
+- **Nginx:** Para gerenciamento de acesso aos containeres do docker, criação de proxy reverso e também Load-Balanced
 - **Redis:** Para armazenamento de dados em cache
 
 ## Requisitos

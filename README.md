@@ -38,7 +38,7 @@ O sistema permite relizar registros de usuários para login, permite a edicao e 
 
 2. **Executando os Containeres**
 
-   Após clonar o projeto, é nescessário renomear ou copiar o arquivo `.env.example` para `.env` e ajustar as variáveis de ambiente conforme necessário, incluindo as configurações para acesso ao banco de dados, para funcionando do serviço de email e para funcionamento correto do "Redis".
+   Após clonar o projeto, é nescessário renomear ou copiar o arquivo `.env.example` para `.env` no caminho (".\register_books\backend") e ajustar as variáveis de ambiente conforme necessário, incluindo as configurações para acesso ao banco de dados, para funcionando do serviço de email e para funcionamento correto do "Redis".
    Caso esteja em um ambiente linux, basta somente rodar o comando abaixo dentro da pasta do projeto:
        
     `cp .env.example .env`

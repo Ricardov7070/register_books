@@ -68,6 +68,7 @@ class UserController extends Controller
 
             return response()->json([
                 'success' => 'Login successful. Welcome ' . $user->name . '!',
+                'user' => $user->name,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
             ], 200);
@@ -203,7 +204,7 @@ class UserController extends Controller
  *     tags={"Gerenciamento de Usuário"},
  *     @OA\Response(
  *         response=200,
- *         description="Updated successfully!"
+ *         description="Updated successfully. Please log in again!"
  *     ),
  *     @OA\Response(
  *         response=500,
@@ -245,7 +246,7 @@ class UserController extends Controller
                 $existingUser->tokens()->delete();
 
                 return response()->json([
-                    'success' => 'Updated successfully!',
+                    'success' => 'Updated successfully. Please log in again!',
                     'user' => $user
                 ], 200); 
 

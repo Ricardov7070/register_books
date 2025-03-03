@@ -99,8 +99,6 @@ button:hover {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,10 +107,10 @@ button:hover {
   opacity: 1;
 }
 
-.modal {
+.modalUser {
   background-color: rgb(236, 235, 235) !important;
   padding: 15px;
-  width: 350px;
+  width: 1100px;
   height: auto;
   max-height: 415px; 
   overflow-y: auto;

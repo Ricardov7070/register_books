@@ -28,6 +28,9 @@ const Login: React.FC = () => {
         showAlert(`😃 ${response.data.success}`, "success");
 
         localStorage.setItem("token", response.data.access_token);
+        localStorage.setItem("userNome", response.data.user);
+        localStorage.setItem("userEmail", email); 
+        localStorage.setItem("userPassword", password);
         
       }
 

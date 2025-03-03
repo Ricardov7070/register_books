@@ -149,7 +149,7 @@
                 "operationId": "0f67ac148919e97f49e2d82b9a3359f6",
                 "responses": {
                     "200": {
-                        "description": "Updated successfully!"
+                        "description": "Updated successfully. Please log in again!"
                     },
                     "500": {
                         "description": "An error occurred, try again!"

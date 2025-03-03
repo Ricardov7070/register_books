@@ -142,27 +142,27 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
   return (
     <>
       <div className="modal-overlay">
-        <div className="modal">
+        <div className="modalUser">
           <div className="row d-flex justify-content-end">
             <button type="button" className="btn-close" onClick={onClose}></button>
             {alert && <div className="alert-container">{alert}</div>}
           </div>
           <h2 className="text-center">{book ? "Edit Book" : "Add Book"}</h2>
           <form>
-            <div className="row">
-              <div className="col-md-4">
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Title:</label>
                   <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Author:</label>
                   <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} required />
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Publisher:</label>
                   <input type="text" value={publisher} onChange={(e) => setPublisher(e.target.value)} required />
@@ -170,20 +170,20 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-md-4">
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Language:</label>
                   <input type="text" value={language} onChange={(e) => setLanguage(e.target.value)} required />
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Publication Year:</label>
                   <input type="number" value={publication_year} onChange={(e) => setYear(parseInt(e.target.value) || 0)} required />
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Edition:</label>
                   <input type="number" min="1" value={edition} onChange={(e) => setEdition(parseInt(e.target.value) || 1)} required />
@@ -191,20 +191,20 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-md-4">
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Gender:</label>
                   <input type="text" value={gender} onChange={(e) => setGender(e.target.value)} required />
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Quantity Pages:</label>
                   <input type="number" min="1" value={quantity_pages} onChange={(e) => setPages(parseInt(e.target.value) || 1)} required />
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <div className="form-group">
                   <label>Format:</label>
                   <input type="text" value={format} onChange={(e) => setFormat(e.target.value)} required />

@@ -83,9 +83,9 @@ O sistema permite relizar registros de usuários para login, permite a edicao e 
 
 7. **Rodar os testes unitários no backend:**
 
-    Caso deseje rodar os testes das funções da API invidualmente, você pode rodar o comando abaixo no terminal no diretório (".\register_books\backend"):
-
-   `php artisan test`
+    Caso deseje rodar os testes das funções da API invidualmente, você pode rodar o comando abaixo dentro de um dos containeres de aplicação do laravel:
+    `docker exec -it laravel-1 sh` => Comando exemplo para acessar o terminal do container;
+    `php artisan test` => Comando para rodar os testes unitários;
 
 9. **Testar as Rotas da API:**
 

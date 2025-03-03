@@ -2,57 +2,65 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthCard from "./AuthCard";
 import api from "../services/api";
+import { useCustomAlert } from "../hooks/useCustomAlert";
+
 
 const Login: React.FC = () => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
+  const { alert, showAlert } = useCustomAlert();
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
+
+  // Realiza a autenticação do usuário
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
     e.preventDefault();
-  
+
     try {
 
-      const response = await api.post("/login", { email, password });
-  
+      const response = await api.post("/auth/signin", { email, password });
+
       if (response.status === 200) {
 
-        alert(response.data.success);
+        showAlert(`😃 ${response.data.success}`, "success");
 
         localStorage.setItem("token", response.data.access_token);
-        navigate("/home");
-
+        
+        setTimeout(() => {
+          navigate("/home");
+        }, 1200);
+        
       }
+
     } catch (error: any) {
 
-      if (error.response?.status === 400) {
+      if (error.response.status === 400) {
 
-        alert(error.response.data.message || "Invalid credentials!");
+        const erros = error.response.data.errors;
 
-      } else if (error.response?.status === 422) {
+        setPasswordError(erros.password[0]);
 
-        const errors = error.response.data.errors;
-        const errorMessages = Object.values(errors).flat().join("\n");
-        alert(errorMessages);
+      } else if (error.response.status === 401) {
 
-      } else if (error.response?.status === 500) {
-
-        alert("Server error: " + (error.response.data.error || "Try again later."));
+        showAlert(`😞 ${error.response.data.warning}`, "warning");
 
       } else {
 
-        alert("Unexpected error: " + error.message);
+        showAlert(`🚫 ${error.response.data.error}`, "error");
 
-      }
-
-    }
+      };
+      
+    };
 
   };
+
   
   return (
     <AuthCard title="Login">
+      {alert}
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-3">
           <label>Email:</label>
@@ -68,11 +76,15 @@ const Login: React.FC = () => {
           <label>Senha:</label>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${passwordError ? "is-invalid" : ""}`}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (passwordError) setPasswordError(null);
+            }}
             required
           />
+          {passwordError && <div className="invalid-feedback">{passwordError}</div>}
         </div>
         <div className="d-flex justify-content-end mb-3">
           <Link to="/forgot-password" className="text-decoration-none">
@@ -92,7 +104,7 @@ const Login: React.FC = () => {
       </div>
     </AuthCard>
   );
-
+  
 };
 
 export default Login;

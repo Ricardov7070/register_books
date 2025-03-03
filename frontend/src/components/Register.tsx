@@ -1,19 +1,56 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthCard from './AuthCard';
+import api from "../services/api";
+import { useCustomAlert } from "../hooks/useCustomAlert";
 
 const Register: React.FC = () => {
+
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { alert, showAlert } = useCustomAlert();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  // Realiza o registro do usuário
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
-    console.log('Registro:', { name, email, password });
+
+    try {
+
+      const response = await api.post("/auth/signup", { name, email, password });
+
+      if (response.status === 200) {
+
+        showAlert(`✅ ${response.data.success}`, "success");
+
+        setName("");
+        setEmail("");
+        setPassword("");
+    
+      }
+
+    } catch (error: any) {
+
+      if (error.response.status === 400) {
+
+        showAlert(`⚠️ ${error.response.data.message}`, "info");
+
+      } else {
+
+        showAlert(`🚫 ${error.response.data.error}`, "error");
+
+      };
+
+    };
+
   };
+
 
   return (
     <AuthCard title="Registro">
+      {alert}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name:</label>
@@ -49,6 +86,7 @@ const Register: React.FC = () => {
       </div>
     </AuthCard>
   );
+  
 };
 
 export default Register;

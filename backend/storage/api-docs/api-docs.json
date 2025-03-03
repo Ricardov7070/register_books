@@ -100,13 +100,13 @@
                 }
             }
         },
-        "/api/logoutUser/{id_user}": {
+        "/api/logoutUser": {
             "post": {
                 "tags": [
                     "Gerenciamento de Usuário"
                 ],
                 "summary": "Realiza o logout do usuário atual autenticado",
-                "operationId": "190cc0c834a85c1c6a0056df77bb3e72",
+                "operationId": "b1fe85d5feee49f1ed3f7a72f4a0bff8",
                 "responses": {
                     "200": {
                         "description": "Logout completed successfully!"
@@ -116,9 +116,6 @@
                     },
                     "400": {
                         "description": "Undefined User!"
-                    },
-                    "403": {
-                        "description": "Unauthorized access."
                     }
                 }
             }
@@ -198,7 +195,7 @@
                 "operationId": "4d634678aff3ba5044ea4201b72250f3",
                 "responses": {
                     "200": {
-                        "description": "Email sent successfully!"
+                        "description": "Email sent successfully. Check your email inbox to access your new password!"
                     },
                     "500": {
                         "description": "An error occurred, try again!"

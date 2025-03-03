@@ -3,6 +3,7 @@
 namespace App\Models\Books;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 
 class RegisterBooks extends Authenticatable
 {
-    use HasFactory, SoftDeletes; 
+    use HasApiTokens, HasFactory, SoftDeletes; 
 
     protected $table = 'register_books';
 
@@ -95,8 +96,7 @@ class RegisterBooks extends Authenticatable
                         'edition' => $book->edition,
                         'gender' => $book->gender,
                         'quantity_pages' => $book->quantity_pages,
-                        'format' => $book->format,
-                        'created_at' => $book->created_at->format('d/m/Y'),
+                        'format' => $book->format
                     ];
                 })
                 ->toArray();

@@ -8,6 +8,7 @@ use App\Http\Requests\booksManagementRequests\UpdateBooksRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\JsonResponse;
 use App\Models\Books\RegisterBooks;
+use Illuminate\Support\Facades\Log;
 
 
 class BooksController extends Controller
@@ -123,6 +124,8 @@ class BooksController extends Controller
             ], 400);
     
         } catch (\Throwable $th) {
+
+            Log::info($request);
         
             return response()->json([
                 'error' => 'An error occurred, try again!',
@@ -237,6 +240,8 @@ class BooksController extends Controller
             }
             
         }
+
+        return response()->json([], 200);
 
     }
 

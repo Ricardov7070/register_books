@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 use App\Models\Users\User;
 use Illuminate\Support\Facades\Hash;
 use App\Services\EmailService;
+use Illuminate\Support\Facades\Log;
 
 
 class UserController extends Controller
@@ -59,16 +60,14 @@ class UserController extends Controller
 
             if (!$user || !Hash::check($credentials['password'], $user->password)) {
                 return response()->json([
-                    'message' => 'Invalid credentials!',
-                ], 400);
+                    'warning' => 'Invalid credentials!',
+                ], 401);
             }
 
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
-                'success' => 'Login successful!',
-                'id_user' => $user->id,
-                'user' => $user->name,
+                'success' => 'Login successful. Welcome ' . $user->name . '!',
                 'access_token' => $token,
                 'token_type' => 'Bearer',
             ], 200);
@@ -93,7 +92,7 @@ class UserController extends Controller
 
 /**
  * @OA\Post(
- *     path="/api/logoutUser/{id_user}",
+ *     path="/api/logoutUser",
  *     summary="Realiza o logout do usuário atual autenticado",
  *     tags={"Gerenciamento de Usuário"},
  *     @OA\Response(
@@ -108,25 +107,13 @@ class UserController extends Controller
  *         response=400,
  *         description="Undefined User!"
  *     ),
- *     @OA\Response(
- *         response=403,
- *         description="Unauthorized access."
- *     ),
  * )
  */
-    public function logoutUser ($id_user): JsonResponse {
+    public function logoutUser (): JsonResponse {
 
         try {
 
-            if (auth()->id() !== (int) $id_user) {
-
-                return response()->json([
-                    'message' => 'Unauthorized access.',
-                ], 403);
-
-            }
-
-            $existingUser = $this->modelUsers->searchUser($id_user);
+            $existingUser = $this->modelUsers->searchUser(auth()->id());
 
             if (!$existingUser) {
 
@@ -365,7 +352,7 @@ class UserController extends Controller
  *     tags={"Gerenciamento de Usuário"},
  *     @OA\Response(
  *         response=200,
- *         description="Email sent successfully!"
+ *         description="Email sent successfully. Check your email inbox to access your new password!"
  *     ),
  *     @OA\Response(
  *         response=500,
@@ -401,7 +388,7 @@ class UserController extends Controller
                                               );
 
                 return response()->json([
-                    'success' => 'Email sent successfully!',
+                    'success' => 'Email sent successfully. Check your email inbox to access your new password!',
                 ], 200);
 
             }

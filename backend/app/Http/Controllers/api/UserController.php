@@ -300,19 +300,11 @@ class UserController extends Controller
  *     ),
  * )
  */
-    public function deleteRecord ($id_user): JsonResponse {
+    public function deleteRecord (): JsonResponse {
 
         try {
 
-            if (auth()->id() !== (int) $id_user) {
-
-                return response()->json([
-                    'message' => 'Unauthorized access.',
-                ], 403);
-
-            }
-
-            $existingUser = $this->modelUsers->searchUser($id_user);
+            $existingUser = $this->modelUsers->searchUser(auth()->id());
 
             if (!$existingUser) {
 
@@ -324,7 +316,7 @@ class UserController extends Controller
 
                 $existingUser->tokens()->delete();
 
-                $user = $this->modelUsers->deleteUser($id_user);
+                $user = $this->modelUsers->deleteUser(auth()->id());
 
                 return response()->json([
                     'success' => 'Successfully deleted!',

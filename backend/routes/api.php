@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Rotas "Usuários"
     Route::put('/updateUser/{id_user}', [UserController::class, 'updateRecord']);
     Route::post('/logoutUser', [UserController::class, 'logoutUser']);
-    Route::delete('/deleteUser/{id_user}', [UserController::class, 'deleteRecord']);
+    Route::delete('/deleteUser', [UserController::class, 'deleteRecord']);
 
     // Rotas "Livros"
     Route::post('/registerBooks', [BooksController::class, 'registerBooks']);

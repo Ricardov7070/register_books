@@ -31,7 +31,7 @@ const Login: React.FC = () => {
         
         setTimeout(() => {
           navigate("/home");
-        }, 1500);
+        }, 1100);
         
       }
 

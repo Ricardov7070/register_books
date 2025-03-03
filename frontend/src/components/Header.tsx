@@ -39,6 +39,41 @@ const Header: React.FC = () => {
   };
 
 
+  const handleDeleteUser = async () => {
+    
+    if (window.confirm("Would you like to delete this user?")) {
+
+      try {
+
+        const response = await api.delete("/deleteUser");
+
+        if (response.status === 200) {
+
+          showAlert(`✅ ${response.data.success}`, "success");
+
+          logout(); 
+      
+        }
+
+      } catch (error: any) {
+
+        if (error.response.status === 400) {
+
+          showAlert(`⚠️ ${error.response.data.message}`, "info");
+
+        } else {
+
+          showAlert(`🚫 ${error.response.data.error}`, "error");
+
+        };
+
+      };
+
+    };
+
+  };
+
+
   return (
     <>
       {alert && <div className="alert-container">{alert}</div>}
@@ -69,7 +104,7 @@ const Header: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button className="dropdown-item">
+                <button className="dropdown-item" onClick={handleDeleteUser}>
                   Delete Profile
                 </button>
               </li>

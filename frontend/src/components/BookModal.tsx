@@ -24,6 +24,15 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
   const [quantity_pages, setPages] = useState<number>(1);
   const [format, setFormat] = useState<string>("");
   const { alert, showAlert } = useCustomAlert();
+  const [titleError, setTitleError] = useState<string | null>(null);
+  const [authorError, setAuthorError] = useState<string | null>(null);
+  const [publisherError, setPublisherError] = useState<string | null>(null);
+  const [languageError, setLanguageError] = useState<string | null>(null);
+  const [yearError, setYearError] = useState<string | null>(null);
+  const [editionError, setEditionError] = useState<string | null>(null);
+  const [genderError, setGenderError] = useState<string | null>(null);
+  const [pagesError, setPagesError] = useState<string | null>(null);
+  const [formatError, setFormatError] = useState<string | null>(null);
 
 
   useEffect(() => {
@@ -89,7 +98,17 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
 
       if (error.response.status === 400) {
 
-        showAlert(`⚠️ ${error.response.data.message}`, "info");
+        const erros = error.response.data.errors;
+
+        setTitleError(erros.title ? erros.title[0] : null);
+        setAuthorError(erros.author ? erros.author[0] : null);
+        setPublisherError(erros.publisher ? erros.publisher[0] : null);
+        setLanguageError(erros.language ? erros.language[0] : null);
+        setYearError(erros.publication_year ? erros.publication_year[0] : null);
+        setEditionError(erros.edition ? erros.edition[0] : null);
+        setGenderError(erros.gender ? erros.gender[0] : null);
+        setPagesError(erros.quantity_pages ? erros.quantity_pages[0] : null);
+        setFormatError(erros.format ? erros.format[0] : null);
 
       } else {
 
@@ -126,7 +145,17 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
 
       if (error.response.status === 400) {
 
-        showAlert(`⚠️ ${error.response.data.message}`, "info");
+        const erros = error.response.data.errors;
+
+        setTitleError(erros.title ? erros.title[0] : null);
+        setAuthorError(erros.author ? erros.author[0] : null);
+        setPublisherError(erros.publisher ? erros.publisher[0] : null);
+        setLanguageError(erros.language ? erros.language[0] : null);
+        setYearError(erros.publication_year ? erros.publication_year[0] : null);
+        setEditionError(erros.edition ? erros.edition[0] : null);
+        setGenderError(erros.gender ? erros.gender[0] : null);
+        setPagesError(erros.quantity_pages ? erros.quantity_pages[0] : null);
+        setFormatError(erros.format ? erros.format[0] : null);
 
       } else {
 
@@ -153,19 +182,49 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Title:</label>
-                  <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                  <input 
+                    type="text" 
+                    value={title} 
+                    className={titleError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                      if (titleError) setTitleError(null);
+                    }}
+                    required 
+                  />
+                  {titleError && <small className="invalid-feedback">{titleError}</small>}
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Author:</label>
-                  <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} required />
+                  <input 
+                    type="text" 
+                    value={author} 
+                    className={authorError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setAuthor(e.target.value);
+                      if (authorError) setAuthorError(null);
+                    }}
+                    required 
+                  />
+                  {authorError && <small className="invalid-feedback">{authorError}</small>}
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Publisher:</label>
-                  <input type="text" value={publisher} onChange={(e) => setPublisher(e.target.value)} required />
+                  <input 
+                    type="text" 
+                    value={publisher} 
+                    className={publisherError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setPublisher(e.target.value);
+                      if (publisherError) setPublisherError(null);
+                    }}
+                    required 
+                  />
+                  {publisherError && <small className="invalid-feedback">{publisherError}</small>}
                 </div>
               </div>
             </div>
@@ -174,19 +233,50 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Language:</label>
-                  <input type="text" value={language} onChange={(e) => setLanguage(e.target.value)} required />
+                  <input 
+                    type="text" 
+                    value={language} 
+                    className={languageError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setLanguage(e.target.value);
+                      if (languageError) setLanguageError(null);
+                    }}
+                    required 
+                  />
+                  {languageError && <small className="invalid-feedback">{languageError}</small>}
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Publication Year:</label>
-                  <input type="number" value={publication_year} onChange={(e) => setYear(parseInt(e.target.value) || 0)} required />
+                  <input 
+                    type="number" 
+                    value={publication_year} 
+                    className={yearError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setYear(parseInt(e.target.value) || 0);
+                      if (yearError) setYearError(null);
+                    }}
+                    required 
+                  />
+                  {yearError && <small className="invalid-feedback">{yearError}</small>}
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Edition:</label>
-                  <input type="number" min="1" value={edition} onChange={(e) => setEdition(parseInt(e.target.value) || 1)} required />
+                  <input 
+                    type="number" 
+                    min="1" 
+                    value={edition} 
+                    className={editionError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setEdition(parseInt(e.target.value) || 1);
+                      if (editionError) setEditionError(null);
+                    }}
+                    required 
+                  />
+                  {editionError && <small className="invalid-feedback">{editionError}</small>}
                 </div>
               </div>
             </div>
@@ -195,19 +285,50 @@ const BookModal: React.FC<BookModalProps> = ({ book, onClose, onSave }) => {
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Gender:</label>
-                  <input type="text" value={gender} onChange={(e) => setGender(e.target.value)} required />
+                  <input 
+                    type="text" 
+                    value={gender} 
+                    className={genderError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setGender(e.target.value);
+                      if (genderError) setGenderError(null);
+                    }}
+                    required 
+                  />
+                  {genderError && <small className="invalid-feedback">{genderError}</small>}
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Quantity Pages:</label>
-                  <input type="number" min="1" value={quantity_pages} onChange={(e) => setPages(parseInt(e.target.value) || 1)} required />
+                  <input 
+                    type="number" 
+                    min="1" 
+                    value={quantity_pages} 
+                    className={pagesError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setPages(parseInt(e.target.value) || 1);
+                      if (pagesError) setPagesError(null);
+                    }}
+                    required 
+                  />
+                  {pagesError && <small className="invalid-feedback">{pagesError}</small>}
                 </div>
               </div>
               <div className="col-md-3">
                 <div className="form-group">
                   <label>Format:</label>
-                  <input type="text" value={format} onChange={(e) => setFormat(e.target.value)} required />
+                  <input 
+                    type="text" 
+                    value={format} 
+                    className={formatError ? "is-invalid" : ""}
+                    onChange={(e) => {
+                      setFormat(e.target.value);
+                      if (formatError) setFormatError(null);
+                    }}
+                    required 
+                  />
+                  {formatError && <small className="invalid-feedback">{formatError}</small>}
                 </div>
               </div>
             </div>

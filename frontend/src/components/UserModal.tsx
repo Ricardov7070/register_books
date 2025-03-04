@@ -19,6 +19,10 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ show, onClose }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+
 
   useEffect(() => {
 
@@ -52,7 +56,11 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ show, onClose }) => {
 
       if (error.response.status === 400) {
 
-        showAlert(`⚠️ ${error.response.data.message}`, "info");
+        const erros = error.response.data.errors;
+
+        setNameError(erros.name ? erros.name[0] : null);
+        setEmailError(erros.email ? erros.email[0] : null);
+        setPasswordError(erros.password ? erros.password[0] : null);
 
       } else {
 
@@ -83,9 +91,14 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ show, onClose }) => {
                 <input
                   type="text"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  className={nameError ? "is-invalid" : ""}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (nameError) setNameError(null);
+                  }}
                   required
                 />
+                {nameError && <small className="invalid-feedback">{nameError}</small>}
               </div>
             </div>
             <div className="col-md-3">
@@ -94,9 +107,14 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ show, onClose }) => {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  className={emailError ? "is-invalid" : ""}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (emailError) setEmailError(null);
+                  }}
                   required
                 />
+                {emailError && <small className="invalid-feedback">{emailError}</small>}
               </div>
             </div>
             <div className="col-md-3">
@@ -105,9 +123,14 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ show, onClose }) => {
                 <input
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  className={passwordError ? "is-invalid" : ""}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (passwordError) setPasswordError(null);
+                  }}
                   required
                 />
+                {passwordError && <small className="invalid-feedback">{passwordError}</small>}
               </div>
             </div>
           </div>
